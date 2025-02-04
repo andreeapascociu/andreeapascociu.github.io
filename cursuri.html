@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursuri - Portofoliu</title>
+    <link rel="stylesheet" href="cursuri_style.css">
+    <script defer src="cursuri_script.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Cursurile Mele</h1>
+        <p>Explorează cursurile disponibile și alege ce ți se potrivește!</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Acasă</a></li>
+            <li><a href="cursuri.html">Cursuri</a></li>
+            <li><a href="activitati.html">Activități</a></li>
+        </ul>
+    </nav>
+
+    <section class="lista-cursuri">
+        <h2>Lista Cursurilor</h2>
+        <p>Apasă pe un curs pentru a vedea mai multe detalii:</p>
+
+        <div class="curs-container">
+            <div class="curs" onclick="showDescription('python')">Python</div>
+            <div class="curs" onclick="showDescription('scratch')">Scratch</div>
+            <div class="curs" onclick="showDescription('scratchJr')">ScratchJr</div>
+            <div class="curs" onclick="showDescription('content')">Video Content Making</div>
+            <div class="curs" onclick="showDescription('websites')">Website Development</div>
+            <div class="curs" onclick="showDescription('roblox')">Game Design with Roblox</div>
+            <div class="curs" onclick="showDescription('cpp')">C/C++</div>
+            <div class="curs" onclick="showDescription('digital')">Digital Literacy</div>
+            <div class="curs" onclick="showDescription('engleză')">Ajutor la limba engleză</div>
+            <div class="curs" onclick="showDescription('electronică')">Bazele electronicii</div>
+        </div>
+
+        <div id="descriere-curs" class="descriere-curs">
+            <h3 id="titlu-curs"></h3>
+            <p id="text-curs"></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Cursuri Fizic&Online </p>
+    </footer>
+
+</body>
+</html>

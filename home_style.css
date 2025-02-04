@@ -1,0 +1,185 @@
+/* Resetare stiluri */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fonturi și stiluri generale */
+body {
+    font-family: 'Roboto', sans-serif; /* Font modern */
+    background-color: #f0f0f0; /* Fundal deschis pentru o atmosferă curată */
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif; /* Fonturi pentru titluri */
+}
+
+header {
+    background-color: #4c2c92; /* Mov închis */
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+header img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid #d1a1e1;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+    font-weight: lighter;
+}
+
+/* Navbar */
+nav {
+    background-color: #6a3e94; /* Mov mediu */
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #d1a1e1; /* Lila deschis */
+    transform: scale(1.1); /* Mărirea la hover pentru un efect interactiv */
+}
+
+/* Secțiunea Despre mine */
+#despre {
+    background-color: white;
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#despre h2 {
+    font-size: 2.5em;
+    color: #4c2c92; /* Mov închis */
+    margin-bottom: 20px;
+}
+
+#despre p.about {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px; /* Mai mult spațiu între paragrafe pentru citire mai ușoară */
+    max-width: 80%; /* Lăsăm puțin spațiu pe margini pentru un aspect mai curat */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#despre h3 {
+    font-size: 2em;
+    color: #6a3e94; /* Mov mediu */
+    margin-bottom: 15px;
+}
+
+#despre ul {
+    list-style-type: none;
+    font-size: 1.1em;
+    color: #333;
+    padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#despre ul li {
+    margin-bottom: 10px;
+    line-height: 1.6; /* Spațiu între elemente pentru un aspect mai aerisit */
+}
+
+
+/* Secțiunea Contact */
+#contact {
+    background-color: #4c2c92; /* Mov închis */
+    color: white;
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact h2 {
+    font-size: 2.5em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+#contact p {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+#contact a {
+    color: #d1a1e1; /* Lila deschis */
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#contact a:hover {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 1.3em; /* Mărire la hover pentru a atrage atenția */
+}
+
+/* Media Queries pentru responsive */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    #despre h2, #contact h2 {
+        font-size: 2em;
+    }
+
+    #despre p.about {
+        font-size: 1.1em;
+    }
+
+    #despre ul li, #contact p {
+        font-size: 1em;
+    }
+}
