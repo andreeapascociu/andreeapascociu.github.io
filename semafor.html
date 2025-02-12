@@ -79,6 +79,88 @@ void loop() {
     <h2>Program 3: (Adaugă un alt cod aici)</h2>
     <pre>
 // Adaugă un alt program C++ aici
+        const int ledRosu = 8;
+const int ledGalben = 9;
+const int ledVerde = 10;
+const int ledPieton = 11;
+const int butonPieton = 2;
+bool butonApasat = false;
+
+void setup() {
+  pinMode(ledRosu, OUTPUT);
+  pinMode(ledGalben, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledPieton, OUTPUT);
+  pinMode(butonPieton, INPUT_PULLUP); // Activăm rezistența internă de pull-up
+
+  // Pornim semaforul cu verde pentru mașini
+  digitalWrite(ledVerde, HIGH);
+}
+
+void loop() {
+  // Verificăm constant dacă butonul a fost apăsat
+  if (digitalRead(butonPieton) == HIGH) {
+    butonApasat = true; // Setăm flag-ul
+  }
+
+  // Dacă s-a apăsat butonul, oprire instantă și prioritate pietonilor
+  if (butonApasat) {
+    oprireMasiniSiPermiterePietoni();
+    butonApasat = false; // Resetăm flag-ul
+  }
+
+  // Rulăm secvența normală a semaforului
+  secventaNormalaSemafor();
+}
+
+// Funcție pentru oprirea mașinilor și permiterea pietonilor
+void oprireMasiniSiPermiterePietoni() {
+  digitalWrite(ledVerde, LOW);
+  digitalWrite(ledGalben, LOW);
+  digitalWrite(ledRosu, HIGH);
+  digitalWrite(ledPieton, HIGH);
+  delay(5000); // Pietonii traversează
+
+  // Oprire pietoni, revenire la normal
+  digitalWrite(ledPieton, LOW);
+  digitalWrite(ledRosu, LOW);
+
+  digitalWrite(ledGalben, HIGH);
+  delay(3000); // Galben 3 secunde
+
+  digitalWrite(ledGalben, LOW);
+  digitalWrite(ledVerde, HIGH);
+}
+
+// Funcție pentru ciclul normal al semaforului
+void secventaNormalaSemafor() {
+  digitalWrite(ledVerde, HIGH);
+  delayCuDetectieButon(10000); // Verde 10 secunde
+
+  digitalWrite(ledVerde, LOW);
+  digitalWrite(ledGalben, HIGH);
+  delayCuDetectieButon(3000); // Galben 3 secunde
+
+  digitalWrite(ledGalben, LOW);
+  digitalWrite(ledRosu, HIGH);
+  digitalWrite(ledPieton, HIGH);
+  delayCuDetectieButon(10000); // Roșu 10 secunde (pietoni)
+
+  digitalWrite(ledPieton, LOW);
+  digitalWrite(ledRosu, LOW);
+}
+
+// Funcție care detectează apăsarea butonului în timp ce așteaptă
+void delayCuDetectieButon(int timp) {
+  for (int i = 0; i < timp / 10; i++) { // Verifică butonul la fiecare 10ms
+    if (digitalRead(butonPieton) == HIGH) {
+      butonApasat = true;
+      return;
+    }
+    delay(10);
+  }
+}
+
     </pre>
 </div>
 
