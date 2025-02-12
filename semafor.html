@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programe C++</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Program 1: Aprindere LED pe pin 8</h2>
+    <pre>
+void setup() { 
+    pinMode(8, OUTPUT); 
+} 
+
+void loop() { 
+    digitalWrite(8, HIGH); 
+    delay(1000); 
+    digitalWrite(8, LOW); 
+    delay(1000); 
+}
+    </pre>
+</div>
+
+<div class="container">
+    <h2>Program 2: Semafor simplu</h2>
+    <pre>
+const int ledRosu = 8; 
+const int ledGalben = 9; 
+const int ledVerde = 10; 
+
+void setup() { 
+    pinMode(ledRosu, OUTPUT); 
+    pinMode(ledGalben, OUTPUT); 
+    pinMode(ledVerde, OUTPUT); 
+}
+
+void loop() { 
+    digitalWrite(ledVerde, HIGH); 
+    delay(5000); 
+    digitalWrite(ledVerde, LOW); 
+    digitalWrite(ledGalben, HIGH); 
+    delay(2000); 
+    digitalWrite(ledGalben, LOW); 
+    digitalWrite(ledRosu, HIGH); 
+    delay(5000); 
+    digitalWrite(ledRosu, LOW); 
+}
+    </pre>
+</div>
+
+<div class="container">
+    <h2>Program 3: (Adaugă un alt cod aici)</h2>
+    <pre>
+// Adaugă un alt program C++ aici
+    </pre>
+</div>
+
+</body>
+</html>
