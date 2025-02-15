@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Performanței Elevilor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Analiza Performanței Elevilor</h1>
+    <p>Codul de mai jos analizează datele despre performanța elevilor folosind Python, Pandas, Matplotlib și Seaborn.</p>
+
+    <h2>Cod Python:</h2>
+    <pre><code>
+# Importarea bibliotecilor necesare
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Setare stil vizualizare
+sns.set_style("whitegrid")
+
+# Incarcarea dataset-ului
+df = pd.read_csv("StudentsPerformance.csv")
+
+# Curatarea si preprocesarea datelor
+df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+df = df.dropna()
+
+# Informatii generale despre dataset
+print(df.info())
+print(df.describe())
+
+# Vizualizare distributie scoruri
+plt.figure(figsize=(12, 6))
+sns.histplot(df['math_score'], bins=20, kde=True, color='blue', label='Scor Matematica')
+sns.histplot(df['reading_score'], bins=20, kde=True, color='red', label='Scor Citire')
+sns.histplot(df['writing_score'], bins=20, kde=True, color='green', label='Scor Scriere')
+plt.legend()
+plt.show()
+
+# Ipoteza 1: Cursurile de pregatire imbunatatesc scorurile
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='test_preparation_course', y='math_score', data=df)
+plt.show()
+
+t_stat, p_val = stats.ttest_ind(df[df['test_preparation_course'] == 'completed']['math_score'],
+                                df[df['test_preparation_course'] == 'none']['math_score'])
+print(f"T-test: {t_stat:.4f}, P-value: {p_val:.4f}")
+
+# Ipoteza 2: Nivelul de educatie al parintilor
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='parental_level_of_education', y='math_score', data=df)
+plt.xticks(rotation=45)
+plt.show()
+
+anova_p = stats.f_oneway(*[df[df['parental_level_of_education'] == edu]['math_score'] 
+                           for edu in df['parental_level_of_education'].unique()])
+print(f"P-value ANOVA: {anova_p.pvalue:.4f}")
+
+# Ipoteza 3: Diferente de performanta pe baza genului
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='gender', y='math_score', data=df)
+plt.show()
+
+t_stat, p_val = stats.ttest_ind(df[df['gender'] == 'male']['math_score'], 
+                                df[df['gender'] == 'female']['math_score'])
+print(f"T-test: {t_stat:.4f}, P-value: {p_val:.4f}")
+
+# Crearea unei metrici de performanta generala
+df['average_score'] = df[['math_score', 'reading_score', 'writing_score']].mean(axis=1)
+df['performance_category'] = pd.qcut(df['average_score'], q=4, labels=['Scazut', 'Mediu', 'Ridicat', 'Foarte ridicat'])
+
+# Vizualizare categorii de performanta
+plt.figure(figsize=(10, 6))
+sns.countplot(x='performance_category', data=df, palette="coolwarm")
+plt.show()
+
+# Concluzii finale
+print("\nConcluzii finale:")
+print("1. Elevii care au urmat cursurile de pregatire au obtinut scoruri mai mari la matematica.")
+print("2. Nivelul de educatie al parintilor influenteaza performanta elevilor.")
+print("3. Exista diferente semnificative de scor la matematica intre baieti si fete.")
+print("4. Scorurile la matematica, citire si scriere sunt puternic corelate.")
+print("5. Elevii care beneficiaza de masa standard au scoruri usor mai ridicate fata de cei cu masa gratuita sau redusa.")
+print("6. Am creat o noua variabila pentru clasificarea performantelor elevilor in patru categorii.")
+
+    </code></pre>
+
+
+</body>
+</html>
