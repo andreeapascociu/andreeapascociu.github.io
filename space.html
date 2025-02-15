@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Zborurilor in Spatiu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Analiza Zborurilor in spatiu</h1>
+    
+    <h2>Cod Python:</h2>
+    <pre><code>
+        # Importarea bibliotecilor necesare
+        import pandas as pd
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        from datetime import datetime
+        
+        # Setare stil vizualizare
+        sns.set_style("whitegrid")
+        
+        # Incarcarea dataset-ului
+        df = pd.read_csv("Space_Corrected.csv")
+        
+        # Curatarea si preprocesarea datelor
+        df = df.drop(columns=['Unnamed: 0'])  # Eliminam coloana nenecesara
+        df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')  # Standardizare nume coloane
+        df = df.dropna()  # Eliminarea valorilor lipsa
+        
+        # Convertirea datelor in format datetime
+        df['datum'] = pd.to_datetime(df['datum'], errors='coerce')
+        
+        # Informatii generale despre dataset
+        print("\nInformatii despre dataset:")
+        print(df.info())
+        print("\nPrimele 5 randuri ale dataset-ului:")
+        print(df.head())
+        print("\nStatistici descriptive:")
+        print(df.describe())
+        
+        # Vizualizare lansari pe ani
+        df['year'] = df['datum'].dt.year
+        plt.figure(figsize=(12, 6))
+        sns.histplot(df['year'], bins=60, kde=True, color='blue')
+        plt.title("Evolutia numarului de lansari spatiale din 1957 pana in prezent")
+        plt.xlabel("An")
+        plt.ylabel("Numar de lansari")
+        plt.show()
+        
+        # Cele mai active companii in industria spatiala
+        top_companies = df['company_name'].value_counts().head(10)
+        plt.figure(figsize=(12, 6))
+        sns.barplot(x=top_companies.values, y=top_companies.index, palette="coolwarm", hue=top_companies.index, legend=False)
+        plt.title("Top 10 companii cu cele mai multe lansari spatiale")
+        plt.xlabel("Numar de lansari")
+        plt.ylabel("Companie")
+        plt.show()
+        
+        # Analiza succesului lansarilor
+        plt.figure(figsize=(12, 6))
+        sns.countplot(y=df['status_mission'], order=df['status_mission'].value_counts().index, palette="coolwarm", hue=df['status_mission'], legend=False)
+        plt.title("Statutul misiunilor spatiale")
+        plt.xlabel("Numar de misiuni")
+        plt.ylabel("Statut")
+        plt.show()
+        
+        # Evolutia lansarilor in functie de agentiile spatiale
+        top_agencies = df['company_name'].value_counts().head(5).index
+        df_top_agencies = df[df['company_name'].isin(top_agencies)]
+        
+        # Agregarea datelor pentru fiecare agentie
+        launch_counts = df_top_agencies.groupby(['year', 'company_name']).size().reset_index(name='launch_count')
+        
+        # Plotarea graficele cu numărul de lansări pentru fiecare agenție
+        plt.figure(figsize=(12, 6))
+        sns.lineplot(data=launch_counts, x='year', y='launch_count', hue='company_name', estimator='sum')
+        plt.title("Evolutia numarului de lansari pentru principalele agentii spatiale")
+        plt.xlabel("An")
+        plt.ylabel("Numar de lansari")
+        plt.show()
+        
+        # Rata de succes a companiilor din top 10
+        success_rate = df.groupby('company_name')['status_mission'].apply(lambda x: (x == 'Success').mean()).sort_values(ascending=False).head(10)
+        plt.figure(figsize=(12, 6))
+        sns.barplot(y=success_rate.index, x=success_rate.values, palette="viridis", hue=success_rate.index, legend=False)
+        plt.title("Rata de succes a primelor 10 companii cu cele mai multe lansari")
+        plt.xlabel("Rata de succes")
+        plt.ylabel("Companie")
+        plt.show()
+        
+        # Locatiile cu cele mai multe lansari
+        top_locations = df['location'].value_counts().head(10)
+        plt.figure(figsize=(12, 6))
+        sns.barplot(y=top_locations.index, x=top_locations.values, palette="coolwarm", hue=top_locations.index, legend=False)
+        plt.title("Top 10 locatii cu cele mai multe lansari spatiale")
+        plt.xlabel("Numar de lansari")
+        plt.ylabel("Locatie")
+        plt.show()
+        
+        # Concluzii finale
+        print("\nConcluzii finale:")
+        print("Numarul lansarilor spatiale a crescut semnificativ din 1957 pana in prezent.")
+        print("Cele mai active companii in industria spatiala sunt NASA, Roscosmos, SpaceX si CNSA.")
+        print("Cele mai multe lansari au loc in cateva locatii specifice, cum ar fi Baikonur si Cape Canaveral.")
+        print("Majoritatea misiunilor sunt de succes, dar exista si esecuri notabile.")
+        print("SpaceX a crescut rapid si are o rata de succes ridicata in comparatie cu companiile traditionale.")
+        
+    </code></pre>
+
+
+</body>
+</html>
