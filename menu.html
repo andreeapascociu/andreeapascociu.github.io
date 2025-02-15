@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Datelor McDonald's</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Analiza Datelor McDonald's</h1>
+    
+    <h2>Cod Python:</h2>
+    <pre><code>
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        
+        # Încărcarea dataset-ului McDonald's Nutrition
+        mcdonalds_nutrition = pd.read_csv("menu.csv")
+        
+        # 1. Curățarea datelor
+        mcdonalds_nutrition = mcdonalds_nutrition.dropna()  # Eliminăm valorile lipsă
+        mcdonalds_nutrition.columns = mcdonalds_nutrition.columns.str.strip().str.lower().str.replace(' ', '_')
+        
+        # 2. Explorarea datelor (EDA)
+        print("\n### Informații despre dataset ###")
+        print(mcdonalds_nutrition.info())
+        
+        print("\n### Statistici descriptive ###")
+        print(mcdonalds_nutrition.describe())
+        
+        print("\n### Primele 5 rânduri ###")
+        print(mcdonalds_nutrition.head())
+        
+        # 3. Analiza relațiilor dintre variabile
+        # Relația dintre calorii și macronutrienți
+        plt.figure(figsize=(12, 6))
+        sns.scatterplot(x='calories', y='protein', data=mcdonalds_nutrition, color='blue')
+        plt.title("Relația dintre Calorii și Conținutul de Proteine")
+        plt.xlabel("Calorii")
+        plt.ylabel("Proteine (g)")
+        plt.show()
+        
+        plt.figure(figsize=(12, 6))
+        sns.scatterplot(x='calories', y='total_fat', data=mcdonalds_nutrition, color='red')
+        plt.title("Relația dintre Calorii și Conținutul de Grăsimi")
+        plt.xlabel("Calorii")
+        plt.ylabel("Grăsimi totale (g)")
+        plt.show()
+        
+        plt.figure(figsize=(12, 6))
+        sns.scatterplot(x='calories', y='carbohydrates', data=mcdonalds_nutrition, color='green')
+        plt.title("Relația dintre Calorii și Carbohidrați")
+        plt.xlabel("Calorii")
+        plt.ylabel("Carbohidrați (g)")
+        plt.show()
+        
+        # 4. Analiza distribuției caloriilor în meniu
+        plt.figure(figsize=(12, 6))
+        sns.histplot(mcdonalds_nutrition['calories'], bins=20, kde=True, color='purple')
+        plt.title("Distribuția Caloriilor în Meniul McDonald's")
+        plt.xlabel("Calorii")
+        plt.ylabel("Număr de produse")
+        plt.show()
+        
+        # 5. Analiza produselor cu cele mai multe și cele mai puține calorii
+        top_calories = mcdonalds_nutrition[['item', 'calories']].sort_values(by='calories', ascending=False).head(10)
+        print("\n### Top 10 produse cu cele mai multe calorii ###")
+        print(top_calories)
+        
+        low_calories = mcdonalds_nutrition[['item', 'calories']].sort_values(by='calories', ascending=True).head(10)
+        print("\n### Top 10 produse cu cele mai puține calorii ###")
+        print(low_calories)
+        
+        # 6. Analiza produselor cu cel mai ridicat conținut de proteine și grăsimi
+        top_protein = mcdonalds_nutrition[['item', 'protein']].sort_values(by='protein', ascending=False).head(10)
+        print("\n### Top 10 produse cu cel mai ridicat conținut de proteine ###")
+        print(top_protein)
+        
+        top_fat = mcdonalds_nutrition[['item', 'total_fat']].sort_values(by='total_fat', ascending=False).head(10)
+        print("\n### Top 10 produse cu cel mai ridicat conținut de grăsimi ###")
+        print(top_fat)
+        
+        # 7. Analiza proporției de macronutrienți
+        mcdonalds_nutrition['fat_percentage'] = (mcdonalds_nutrition['total_fat'] * 9) / mcdonalds_nutrition['calories'] * 100
+        mcdonalds_nutrition['protein_percentage'] = (mcdonalds_nutrition['protein'] * 4) / mcdonalds_nutrition['calories'] * 100
+        mcdonalds_nutrition['carb_percentage'] = (mcdonalds_nutrition['carbohydrates'] * 4) / mcdonalds_nutrition['calories'] * 100
+        
+        # Înlocuim valorile NaN cu 0 în procente
+        mcdonalds_nutrition['fat_percentage'] = mcdonalds_nutrition['fat_percentage'].fillna(0)
+        mcdonalds_nutrition['protein_percentage'] = mcdonalds_nutrition['protein_percentage'].fillna(0)
+        mcdonalds_nutrition['carb_percentage'] = mcdonalds_nutrition['carb_percentage'].fillna(0)
+        
+        # Verificăm media procentajelor de macronutrienți
+        macronutrient_avg = mcdonalds_nutrition[['fat_percentage', 'protein_percentage', 'carb_percentage']].mean()
+        
+        # Înlocuim NaN în macronutrient_avg cu 0
+        macronutrient_avg = macronutrient_avg.fillna(0)
+        
+        print("\n### Proporția medie a macronutrienților în produsele McDonald's ###")
+        print(macronutrient_avg)
+        
+        # Verificăm dacă valorile sunt valide
+        if macronutrient_avg.isnull().any():
+            print("Există valori NaN în macronutrient_avg, le înlocuim cu 0.")
+            macronutrient_avg = macronutrient_avg.fillna(0)
+        
+        # Afișăm pentru debugging valorile care vor fi folosite
+        print("Valorile macronutrient_avg pentru graficul pie chart:", macronutrient_avg)
+        
+        # Dacă toate valorile sunt nenule, generăm pie chart-ul
+        if macronutrient_avg.sum() > 0:
+            plt.figure(figsize=(8, 8))
+            plt.pie(macronutrient_avg, labels=['Grăsimi', 'Proteine', 'Carbohidrați'], autopct='%1.1f%%', colors=['red', 'blue', 'green'])
+            plt.title("Proporția medie a macronutrienților în produsele McDonald's")
+            plt.show()
+        else:
+            print("Proporțiile de macronutrienți nu sunt valide pentru a genera pie chart.")
+        
+    </code></pre>
+
+
+</body>
+</html>
