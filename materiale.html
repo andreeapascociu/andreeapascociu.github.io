@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiale Didactice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .list-group {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .list-group li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .accordion {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 15px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .accordion:hover {
+            background-color: #f0f0f0;
+        }
+
+        .panel {
+            padding: 10px;
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+
+        .panel li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Materiale Folositoare </h1>
+</header>
+
+<div class="container">
+    <!-- Python Section -->
+    <div class="section">
+        <h2>Python - Lista de Proiecte</h2>
+        <ul class="list-group">
+            <li><a href="exams.html">Exams csv</a></li>
+            <li><a href="space.html">Space csv</a></li>
+            <li><a href="menu.html">McDonald's csv</a></li>
+            <li><a href=""></a></li>
+        </ul>
+    </div>
+
+    <!-- Atelier Arduino Section -->
+    <div class="section">
+        <h2>Atelier Arduino</h2>
+
+        <!-- Sub-secțiunea 1: Introducere în Arduino -->
+        <button class="accordion">Introducere în Arduino</button>
+        <div class="panel">
+            <ul class="list-group">
+                <li>Ce este Arduino?</li>
+                <li>Componentele principale ale unui kit Arduino</li>
+                <li>Configurații de bază și instalarea software-ului Arduino IDE</li>
+            </ul>
+        </div>
+
+        <!-- Sub-secțiunea 2: Proiecte Arduino de Bază -->
+        <button class="accordion">Proiecte Arduino de Bază</button>
+        <div class="panel">
+            <ul class="list-group">
+                <li>Blink LED</li>
+                <li>Citirea unui buton</li>
+                <li>Controlul unui motor</li>
+            </ul>
+        </div>
+
+        <!-- Sub-secțiunea 3: Proiecte Arduino Avansate -->
+        <button class="accordion">Proiecte Arduino Avansate</button>
+        <div class="panel">
+            <ul class="list-group">
+                <li>Arduino și senzori de temperatură</li>
+                <li>Construirea unui sistem de alarmă</li>
+                <li>Controlul unui robot cu Arduino</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Script pentru a controla acțiunea de deschidere/închidere a sub-secțiunilor
+    var acc = document.getElementsByClassName("accordion");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

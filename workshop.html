@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Arduino - Ședințe</title>
+    <style>
+        /* Stilizare generală */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            box-sizing: border-box;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        html, body {
+    height: 100%;
+}
+
+/* Modifică stilul body pentru a preveni scroll-ul */
+body {
+    overflow: hidden;  /* Aceasta va elimina orice scroll */
+}
+
+/* Modifică containerul principal pentru a se adapta la înălțimea paginii */
+.container {
+    height: calc(100% - 80px); /* Asigură-te că spațiul pentru header și footer este corect */
+    overflow-y: auto; /* Permite derularea conținutului din containerul principal, dar nu întreaga pagină */
+}
+
+        header {
+            background-color: #2ecc71;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2ecc71;
+            font-size: 26px;
+            margin-bottom: 40px;
+        }
+
+        /* Grid Layout pentru sesiuni */
+        .sessions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Styling pentru fiecare ședință */
+        .session {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .session-content {
+            margin-bottom: 20px;
+        }
+
+        .session h3 {
+            font-size: 22px;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .session p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .session .next {
+            display: block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .session .next:hover {
+            background-color: #27ae60;
+        }
+
+        /* Stiluri pentru imagini */
+        .image-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .image-section img {
+            max-width: 40%;  /* Dimensiune mai mică pentru imagini */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            /* Am eliminat efectul de fade */
+        }
+
+        /* Stiluri responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .sessions {
+                grid-template-columns: 1fr; /* Pe mobil, toate ședințele vor fi pe un singur rând */
+            }
+
+            .session h3 {
+                font-size: 20px;
+            }
+
+            .session p {
+                font-size: 15px;
+            }
+
+            .session .next {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+
+            .image-section img {
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .session h3 {
+                font-size: 18px;
+            }
+
+            .session p {
+                font-size: 14px;
+            }
+
+            .session .next {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+
+            .image-section img {
+                max-width: 50%;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            width: 100%;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Atelier Arduino - Structura Ședințelor</h1>
+</header>
+
+<div class="container">
+    <h2>Programul Atelierului</h2>
+
+    <!-- Ședințele cu imagini între ele -->
+    <div class="sessions">
+        <!-- Ședința 1: Introducerea noțiunilor de bază și construirea unui semafor cu LED-uri -->
+        <div class="session" id="session-1">
+            <div class="session-content">
+                <h3>Ședința 1: Introducerea Noțiunilor de Bază și Construirea unui Semafor cu LED-uri</h3>
+                <p>În această ședință, participanții vor învăța noțiunile de bază despre Arduino, inclusiv cum să instaleze Arduino IDE și cum să scrie primele lor programe. Apoi, vor construi un semafor folosind trei LED-uri (roșu, galben, verde) și un program care va simula un semafor real.</p>
+                <a href="#session-2" class="next">Următoarea Ședință</a>
+            </div>
+        </div>
+
+        <!-- Imaginea separată -->
+        <div class="image-section">
+            <img src="arduinow2.jpg" alt="Semafor cu LED-uri">
+        </div>
+        
+        <!-- Imaginea separată -->
+        <div class="image-section">
+            <img src="arduinow1.jpg" alt="Joc Simon Says">
+        </div>
+
+        <!-- Ședința 2: Dezvoltarea unui Joc Simon Says cu LED-uri și Butoane -->
+        <div class="session" id="session-2">
+            <div class="session-content">
+                <h3>Ședința 2: Dezvoltarea unui Joc Simon Says cu LED-uri și Butoane</h3>
+                <p>În această ședință, participanții vor dezvolta un joc "Simon Says" folosind LED-uri și butoane. Jocul va implica aprinderea unor LED-uri în diferite secvențe, iar utilizatorul va trebui să apese butoanele corespunzătoare pentru a replica secvența.</p>
+                <a href="#session-3" class="next">Următoarea Ședință</a>
+            </div>
+        </div>
+
+
+        <!-- Ședința 3: [Completat ulterior] -->
+        <div class="session" id="session-3">
+            <div class="session-content">
+                <h3>Ședința 3: Măsurarea Distanței cu un Senzor Ultrasonic</h3>
+                <p>În această ședință, participanții vor descoperi cum funcționează senzorul ultrasonic și cum poate măsura acesta distanța până la un obiect folosind ecoul undelor sonore. Vor conecta senzorul la Arduino, vor scrie un program pentru a afișa distanța în serial monitor și vor adapta proiectul pentru a indica intervale de distanță prin LED-uri sau un ecran LCD.
+
+                </p>
+                <a href="#session-4" class="next">Următoarea Ședință</a>
+            </div>
+        </div>
+
+        
+        <!-- Imaginea separată -->
+        <div class="image-section">
+            <img src="arduino-ultrasonicsensor-featured.jpg" alt="Ultrasonic sensor">
+        </div>
+
+        <!-- Ședința 4: [Completat ulterior] -->
+        <div class="session" id="session-4">
+            <div class="session-content">
+                <h3>Ședința 4: Detector de sunet cu semnalizare LED</h3>
+                <p>În acest proiect, participanții vor folosi un microfon sau un senzor de sunet pentru a detecta nivelurile sonore din mediu. Sistemul va aprinde LED-uri în funcție de intensitatea sunetului detectat: un LED pentru sunete mici, două LED-uri pentru sunete medii și trei LED-uri pentru sunete puternice. La final, participanții pot adăuga o funcție care să înregistreze nivelul maxim de sunet pe care l-a detectat sistemul.</p>
+                <a href="#session-5" class="next">Următoarea Ședință</a>
+            </div>
+        </div>
+
+        <!-- Ședința 5: [Completat ulterior] -->
+        <div class="session" id="session-5">
+            <div class="session-content">
+                <h3>Ședința 5: Sistem de alarmă cu senzor de mișcare</h3>
+                <p>În această ședință, participanții vor construi un sistem simplu de alarmă care detectează mișcarea și emite un semnal sonor. Vor învăța cum funcționează senzorii de mișcare și cum pot folosi Arduino pentru a reacționa la schimbările din mediu. La final, vor putea extinde proiectul prin adăugarea unui LED de avertizare sau a unui afișaj care indică momentul în care a fost detectată mișcarea.</p>
+                <a href="#session-6" class="next">Următoarea Ședință</a>
+            </div>
+        </div>
+
+
+
+        <!-- Ședința 6: [Completat ulterior] -->
+        <div class="session" id="session-6">
+            <div class="session-content">
+                <h3>Ședința 6: Pian cu Buzzer și Butoane</h3>
+                <p>În această ședință, participanții vor explora principiile sunetului generat electronic folosind un buzzer pasiv conectat la Arduino. Vor învăța cum pot emite note muzicale la frecvențe diferite și vor construi un mini-pian folosind mai multe butoane, fiecare buton corespunzând unei note muzicale. Pe parcurs, vor descoperi cum pot folosi funcția tone() pentru a genera sunete și cum se pot combina butoanele pentru a crea scurte melodii.</p>
+                <a href="" class="next">Înapoi</a>
+            </div>
+        </div>
+
+         <!-- Imaginea separată -->
+         <div class="image-section">
+            <img src="setup.png" alt="Ultrasonic sensor">
+        </div>
+
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 Atelier Arduino - Andreea Păscociu</p>
+</div>
+
+</body>
+</html>
