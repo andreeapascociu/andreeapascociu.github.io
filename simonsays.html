@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple de Cod Arduino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Exemple de Cod Arduino</h1>
+
+    <h2>1. LED Blink</h2>
+    <pre>
+void setup() { 
+    pinMode(9, OUTPUT); 
+} 
+
+void loop() { 
+    digitalWrite(9, HIGH);  
+    delay(1000); 
+    digitalWrite(9, LOW); 
+    delay(1000); 
+}
+    </pre>
+
+    <h2>2. Detectare apăsare buton</h2>
+    <pre>
+#define BUTTON_PIN 6 
+bool lastState = HIGH; 
+
+void setup() { 
+    pinMode(BUTTON_PIN, INPUT_PULLUP);            
+    Serial.begin(9600); 
+} 
+
+void loop() { 
+    bool currentState = digitalRead(BUTTON_PIN); 
+    if (lastState == HIGH && currentState == LOW) { 
+        Serial.println("Buton APĂSAT!"); 
+    }
+    lastState = currentState; 
+}
+    </pre>
+
+    <h2>3. Sunet cu buzzer</h2>
+    <pre>
+const int buzzer = 7;    
+
+void setup(){ 
+    pinMode(buzzer, OUTPUT);
+} 
+
+void loop(){ 
+    tone(buzzer, 1000);  
+    delay(1000);               
+    noTone(buzzer);      
+    delay(1000);              
+}
+    </pre>
+
+    <h2>4. Joc cu secvență de LED-uri</h2>
+    <pre>
+        // Definirea pinilor pentru LED-uri și butoane
+        const int ledPins[] = {9, 10, 11};  // LED-uri la pinii 9, 10, 11
+        const int buttonPins[] = {2, 3, 4};  // Butoane la pinii 2, 3, 4
+        
+        int sequence[3];  // Secvența aleatoare de LED-uri
+        int userSequence[3];  // Secvența apăsată de utilizator
+        int buttonState[3];  // Starea butoanelor
+        int lastButtonState[3];  // Starea anterioară a butoanelor (pentru a detecta schimbarea)
+        
+        void setup() {
+          // Setarea pinilor LED-urilor ca OUTPUT
+          for (int i = 0; i < 3; i++) {
+            pinMode(ledPins[i], OUTPUT);
+            pinMode(buttonPins[i], INPUT_PULLUP);  // Butoanele ca INPUT cu pull-up
+            lastButtonState[i] = HIGH;  // Inițial, butoanele nu sunt apăsate
+          }
+        
+          Serial.begin(9600);  // Inițializare serial pentru debug
+          randomSeed(analogRead(0));  // Sămânță aleatoare pe baza valorii de la pinul analog 0
+          
+          generateSequence();  // Generează secvența inițială aleatoare
+        }
+        
+        void loop() {
+          // Aprind LED-urile conform secvenței aleatoare
+          Serial.println("Secvența de LED-uri:");
+          for (int i = 0; i < 3; i++) {
+            Serial.print("LED ");
+            Serial.print(sequence[i]);
+            Serial.println(" aprins");
+            digitalWrite(ledPins[sequence[i] - 1], HIGH);
+            delay(500);  // LED aprins pentru 500ms
+            digitalWrite(ledPins[sequence[i] - 1], LOW);
+            delay(500);  // LED stins pentru 500ms
+          }
+        
+          // Așteptăm apăsările butoanelor de utilizator
+          Serial.println("Aștept apăsările de butoane...");
+          int userIndex = 0;  // Index pentru a urmări butoanele apăsate
+          while (userIndex < 3) {  // Așteptăm să se apese toate cele 3 butoane
+            for (int i = 0; i < 3; i++) {
+              int currentButtonState = digitalRead(buttonPins[i]);  // Citim starea curentă a butonului
+        
+              // Detectăm schimbarea stării butonului de la HIGH la LOW (apăsare)
+              if (currentButtonState == LOW && lastButtonState[i] == HIGH) {
+                delay(50);  // Debouncing (pauză mică pentru a preveni citirea falsă)
+                userSequence[userIndex] = i + 1;  // Salvează butonul apăsat
+                Serial.print("Butonul ");
+                Serial.print(i + 1);
+                Serial.println(" a fost apăsat");
+        
+                userIndex++;  // Trecem la următorul buton
+              }
+        
+              // Actualizăm starea anterioară a butonului
+              lastButtonState[i] = currentButtonState;
+            }
+          }
+        
+          // Verificăm dacă secvența utilizatorului este corectă
+          bool isCorrect = true;
+          for (int i = 0; i < 3; i++) {
+            if (userSequence[i] != sequence[i]) {
+              isCorrect = false;  // Dacă secvența este greșită
+              break;
+            }
+          }
+        
+          // Afișează dacă secvența este corectă sau greșită
+          if (isCorrect) {
+            Serial.println("Corect! Generăm o nouă secvență...");
+            generateSequence();  // Generează o nouă secvență
+          } else {
+            Serial.println("Greșit! Încearcă din nou...");
+          }
+        
+          delay(1000);  // Pauză înainte de a începe din nou
+        }
+        
+        // Funcție pentru a genera o secvență aleatoare
+        void generateSequence() {
+          for (int i = 0; i < 3; i++) {
+            sequence[i] = random(1, 4);  // Generăm un număr aleator între 1 și 3
+          }
+        }
+        
+    </pre>
+
+    <h2>5. Joc cu LED-uri și buzzer</h2>
+    <pre>
+        // Definirea pinilor pentru LED-uri, butoane și buzzer
+        const int ledPins[] = {9, 10, 11};  // LED-uri la pinii 9, 10, 11
+        const int buttonPins[] = {2, 3, 4};  // Butoane la pinii 2, 3, 4
+        const int buzzerPin = 7;  // Buzzer la pinul 7
+        
+        int sequence[3];  // Secvența aleatoare de LED-uri
+        int userSequence[3];  // Secvența apăsată de utilizator
+        int buttonState[3];  // Starea butoanelor
+        int lastButtonState[3];  // Starea anterioară a butoanelor (pentru a detecta schimbarea)
+        
+        void setup() {
+          // Setarea pinilor LED-urilor ca OUTPUT și butoanelor ca INPUT_PULLUP
+          for (int i = 0; i < 3; i++) {
+            pinMode(ledPins[i], OUTPUT);
+            pinMode(buttonPins[i], INPUT_PULLUP);  // Butoanele ca INPUT cu pull-up
+            lastButtonState[i] = HIGH;  // Inițial, butoanele nu sunt apăsate
+          }
+          
+          pinMode(buzzerPin, OUTPUT);  // Setăm buzzer-ul ca OUTPUT
+        
+          Serial.begin(9600);  // Inițializare serial pentru debug
+          randomSeed(analogRead(0));  // Sămânță aleatoare pe baza valorii de la pinul analog 0
+          
+          generateSequence();  // Generează secvența inițială aleatoare
+        }
+        
+        void loop() {
+          // Aprind LED-urile conform secvenței aleatoare
+          Serial.println("Secvența de LED-uri:");
+          for (int i = 0; i < 3; i++) {
+            Serial.print("LED ");
+            Serial.print(sequence[i]);
+            Serial.println(" aprins");
+            digitalWrite(ledPins[sequence[i] - 1], HIGH);
+            delay(500);  // LED aprins pentru 500ms
+            digitalWrite(ledPins[sequence[i] - 1], LOW);
+            delay(500);  // LED stins pentru 500ms
+          }
+        
+          // Așteptăm apăsările butoanelor de utilizator
+          Serial.println("Aștept apăsările de butoane...");
+          int userIndex = 0;  // Index pentru a urmări butoanele apăsate
+          while (userIndex < 3) {  // Așteptăm să se apese toate cele 3 butoane
+            for (int i = 0; i < 3; i++) {
+              int currentButtonState = digitalRead(buttonPins[i]);  // Citim starea curentă a butonului
+        
+              // Detectăm schimbarea stării butonului de la HIGH la LOW (apăsare)
+              if (currentButtonState == LOW && lastButtonState[i] == HIGH) {
+                delay(50);  // Debouncing (pauză mică pentru a preveni citirea falsă)
+                userSequence[userIndex] = i + 1;  // Salvează butonul apăsat
+                Serial.print("Butonul ");
+                Serial.print(i + 1);
+                Serial.println(" a fost apăsat");
+        
+                userIndex++;  // Trecem la următorul buton
+              }
+        
+              // Actualizăm starea anterioară a butonului
+              lastButtonState[i] = currentButtonState;
+            }
+          }
+        
+          // Verificăm dacă secvența utilizatorului este corectă
+          bool isCorrect = true;
+          for (int i = 0; i < 3; i++) {
+            if (userSequence[i] != sequence[i]) {
+              isCorrect = false;  // Dacă secvența este greșită
+              break;
+            }
+          }
+        
+          // Afișează dacă secvența este corectă sau greșită
+          if (isCorrect) {
+            Serial.println("Corect! Generăm o nouă secvență...");
+            generateSequence();  // Generează o nouă secvență
+          } else {
+            Serial.println("Greșit! Încearcă din nou...");
+            tone(buzzerPin, 1000, 500);  // Buzzer emite sunet de 1000 Hz pentru 500 ms
+          }
+        
+          delay(1000);  // Pauză înainte de a începe din nou
+        }
+        
+        // Funcție pentru a genera o secvență aleatoare
+        void generateSequence() {
+          for (int i = 0; i < 3; i++) {
+            sequence[i] = random(1, 4);  // Generăm un număr aleator între 1 și 3
+          }
+        }
+        
+    </pre>
+
+</div>
+
+</body>
+</html>
