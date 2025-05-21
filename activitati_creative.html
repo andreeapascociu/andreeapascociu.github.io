@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activități și Ateliere Creative pentru Copii</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde: #a3d9a5;
+      --roz: #f9c6d2;
+      --galben: #fce38a;
+      --mov: #dcbdfd;
+      --albastru: #a0e7e5;
+      --font: 'Fredoka', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: linear-gradient(to bottom, #fff1f2, #fceff9);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--albastru);
+      color: #222;
+      text-align: center;
+      padding: 1rem 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 1rem auto;
+      padding: 0 1.2rem;
+    }
+
+    .section-colored {
+        background-color: #f3e8ff; /* lila pastel */
+        padding: 2rem 1rem;
+        border-radius: 20px;
+        margin: 2rem auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-colored .section-title {
+        text-align: center;
+        font-size: 2rem;
+        color: #5b2c83;
+        margin-bottom: 1.5rem;
+        }
+
+        .section-colored .atelier {
+        background: #fff;
+        border-radius: 15px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-colored .atelier h4 {
+        color: #7e3ff2;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        }
+
+
+    .section-title {
+      font-size: 2rem;
+      color: #e76f51;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "🌟";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.4rem;
+    }
+
+    .atelier {
+      background-color: var(--roz);
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .atelier:hover {
+      transform: scale(1.01);
+    }
+
+    .atelier h4 {
+      margin-bottom: 0.5rem;
+      color: #ca3e47;
+      font-size: 1.3rem;
+    }
+
+    .atelier p {
+      font-size: 1rem;
+    }
+
+    .gallery-section {
+      padding: 2rem 1rem;
+      background: var(--mov);
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+
+    .gallery-section h2 {
+      text-align: center;
+      color: #5d3a9b;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: var(--verde);
+      color: #222;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .atelier {
+        padding: 1.2rem;
+      }
+
+      .atelier h4 {
+        font-size: 1.1rem;
+      }
+
+      .gallery img {
+        height: 140px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 0.95rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+
+      .gallery-section h2 {
+        font-size: 1.4rem;
+      }
+
+      .gallery img {
+        height: 120px;
+      }
+
+      
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Activități și Ateliere Creative pentru Copii</h1>
+    <p>Portofoliu educativ și inspirație creativă</p>
+  </header>
+
+  <div class="container">
+    <h2 class="section-title">🌸 Ateliere tematice de primăvară</h2>
+
+    <div class="atelier">
+      <h4>🐰 Iepurași din materiale naturale</h4>
+      <p>Copiii au explorat elemente din natură – frunze, bețișoare, flori – pentru a crea iepurași decorativi.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🧦 Iepurași de pluș din șosete</h4>
+      <p>Activitate senzorială și practică în care cei mici au confecționat jucării moi din șosete și orez.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🎨 Pictură pe ouă</h4>
+      <p>Copiii au decorat ouă cu acuarele, carioci și stickere, explorând exprimarea artistică personală.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🧩 Puzzle cu litere și cifre</h4>
+      <p>Un joc educativ ce combină învățarea literelor cu motricitatea fină, prin cârlige și carton.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🎭 Joc muzical cu poziții de yoga</h4>
+      <p>Activitate energică în care copiii au practicat mișcarea și atenția, jucând scaune muzicale cu poziții de yoga.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🎨 Colaje cu paste colorate</h4>
+      <p>Pictură și colaj cu paste pentru a crea animale și forme decorative – exercițiu de motricitate și estetică.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>💧 Experimente cromatice</h4>
+      <p>Pe dischete demachiante, copiii au testat reacții între apă și culoare, obținând efecte spectaculoase.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🥚 Vânătoare de ouă</h4>
+      <p>Ouăle ascunse conțineau provocări distractive, încurajând mișcarea, atenția și colaborarea.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🌬 Joc cu paie și litere</h4>
+      <p>Prin suflat, copiii au format cuvinte din litere, un joc amuzant și educativ de vocabular.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>✂️ Coșulețe pentru ouă</h4>
+      <p>Confecționare de coșuri decorative din hârtie – un exercițiu de tăiere, pliere și creativitate practică.</p>
+    </div>
+  </div>
+
+  <section class="section-colored">
+  <div class="container">
+    <h2 class="section-title">🎨 După-amiază Creativă pentru Copii</h2>
+
+    <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+      Hai să petrecem o după-amiază plină de imaginație, culoare și joacă!<br>
+      Trei ateliere creative îi așteaptă pe cei mici să-și folosească mâinile și mintea pentru a crea lucruri minunate!
+    </p>
+
+    <div class="atelier">
+      <h4>🌟 Atelier de Bijuterii din Mărgele și Elastice</h4>
+      <p>Fiecare copil devine designer! Brățări și coliere colorate, create cu multă răbdare și bucurie.</p>
+      <p>✨ Luăm acasă bijuterii făcute cu propriile mâini!</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🦢 Atelier de Origami</h4>
+      <p>Pliem hârtia și dăm viață broscuțelor, păsărilor și fluturașilor!</p>
+      <p>✨ O activitate care dezvoltă răbdarea și coordonarea.</p>
+    </div>
+
+    <div class="atelier">
+      <h4>🎨 Atelier „Tabloul Meu Pictat cu Mâinile”</h4>
+      <p>Degetele devin pensule, iar pânsa - o lume de culori!</p>
+      <p>✨ Copiii își creează propriul tablou, liber și colorat.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ateliere">
+  <div class="container">
+    <h2>🔬 Atelierul „Magia Științei”</h2>
+    <p>Descoperă cum știința se transformă în magie prin experimente interactive pentru copii! 🌟</p>
+
+    <!-- Atelier List -->
+    <div class="atelier">
+      <h3>Mesajul Secret al Spionilor – Scrisul Invizibil cu Lămâie 🕵️‍♂️</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Hârtie albă, bețișor de urechi, zeamă de lămâie, lumânare</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Căldura oxidează sucul de lămâie și apare mesajul secret.</li>
+        <li><strong>Explicație:</strong> Acidul citric se oxidează și devine maro la căldură.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Porumbul Magician – Porumbul Săltăreț 🌽🎩</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Apă, oțet, praf de copt, boabe de porumb</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Dioxidul de carbon ridică boabele în sus.</li>
+        <li><strong>Explicație:</strong> Bulele de CO₂ se sparg și porumbul „dansează”.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Pasta de Dinți pentru Elefanți 🐘🫧</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Apă oxigenată, drojdie, detergent, colorant, sticlă</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Reacția eliberează oxigen și formează spumă.</li>
+        <li><strong>Explicație:</strong> Drojdia catalizează descompunerea apei oxigenate.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Magia Culorilor Curcubeu 🌈</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Apă simplă, apă cu zahăr, colorant alimentar</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Colorantul se mișcă diferit în funcție de densitate.</li>
+        <li><strong>Explicație:</strong> Apa cu zahăr este mai densă, încetinind mișcarea culorii.</li>
+      </ul>
+    </div>
+
+
+    <div class="atelier">
+      <h3>Dansul Sunetelor 🎶✨</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Bol, folie alimentară, boxă, zahăr/orez</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Sunetul vibrează și mișcă particulele pe folie.</li>
+        <li><strong>Explicație:</strong> Undele sonore creează vibrații vizibile.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Piperul Fugar 🏃‍♂️</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Apă, piper, detergent</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Detergentul rupe tensiunea superficială și piperul „fuge”.</li>
+        <li><strong>Explicație:</strong> Tensiunea superficială este distrusă chimic.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Apa Fermecată care Urcă 🕯️</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Farfurie cu apă, lumânare, pahar</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Oxigenul arde, presiunea scade, apa urcă în pahar.</li>
+        <li><strong>Explicație:</strong> Presiunea atmosferică împinge apa în interiorul paharului.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Apa Călătoare 🚰</h3>
+      <ul>
+        <li><strong>Materiale:</strong> 3 pahare, apă, șervețele</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Apa „merge” dintr-un pahar în altul prin capilaritate.</li>
+        <li><strong>Explicație:</strong> Seva plantelor funcționează în același mod.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Scorțișoara Magică ✨</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Apă, scorțișoară măcinată</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Scorțișoara nu se udă – plutește.</li>
+        <li><strong>Explicație:</strong> Scorțișoara este hidrofobă – respinge apa.</li>
+      </ul>
+    </div>
+
+    <div class="atelier">
+      <h3>Lampa cu Lavă Extraterestră 👽🔥</h3>
+      <ul>
+        <li><strong>Materiale:</strong> Borcan, ulei, apă, colorant, tabletă efervescentă</li>
+        <li><strong>Funcționează:</strong> ✅</li>
+        <li><strong>Cum funcționează:</strong> Tableta creează bule care urcă prin ulei cu efect de lavă.</li>
+        <li><strong>Explicație:</strong> Densitatea diferită și gazul provoacă efectul de lavă.</li>
+      </ul>
+    </div>
+
+</section>
+
+
+
+
+  <!-- GALERIE FOTO -->
+  <section class="gallery-section">
+    <h2>📷 Galerie foto</h2>
+    <div class="gallery">
+      <!-- Înlocuiește cu fotografiile tale -->
+      <img src="activitate1.png" alt="Activitate 1">
+      <img src="activitate2.jpg" alt="Activitate 2">
+      <img src="activitate3.jpg" alt="Activitate 3">
+      <img src="activitate4.png" alt="Activitate 4">
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 - Portofoliu educațional realizat de Andreea Păscociu
+  </footer>
+
+</body>
+</html>
