@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>Codul meu CSS</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: monospace;
+      padding: 20px;
+    }
+    pre {
+      background: #222;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.4em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Codul meu CSS</h1>
+  <pre><code>
+* { box-sizing: border-box; }
+body {
+  background: #000;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+.wrap { text-align: center; }
+#game {
+  display: grid;
+  grid-template-columns: repeat(12, 30px);
+  grid-template-rows: repeat(12, 30px);
+  gap: 2px;
+  margin-top: 10px;
+}
+.cell { width: 20px; height: 20px; }
+.wall { background: #1f3ad7; }
+.dot {
+  background: #000;
+  position: relative;
+}
+.dot::after {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ffd07a;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px #ffd07a;
+}
+.pacman {
+  background: red;
+  border-radius: 50%;
+}
+.ghost {
+  background: purple;
+  border-radius: 50%;
+}
+.hint { opacity: .8; font-size: .9rem; margin-top: 6px; }
+  </code></pre>
+</body>
+</html>
